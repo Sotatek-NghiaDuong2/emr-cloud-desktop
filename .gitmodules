@@ -1,0 +1,5 @@
+[submodule "emr-web"]
+	path = emr-web
+	url = https://github.com/sotatek-dev/emr-cloud-fe.git
+	ignore = dirty
+	branch = nghia.duong2/electron

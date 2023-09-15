@@ -1,0 +1,40 @@
+{
+  "name": "emr-cloud-desktop",
+  "version": "1.0.0",
+  "main": "./dist/src/main.js",
+  "license": "MIT",
+  "private": true,
+  "build": {
+    "icon": "public/favicon.ico",
+    "productName": "smartkarte",
+    "files": [
+      "dist",
+      "./emr-web/build/**/*"
+    ],
+    "win": {},
+    "linux": {},
+    "mac": {}
+  },
+  "devDependencies": {
+    "@types/electron": "^1.6.10",
+    "concurrently": "^8.2.1",
+    "cross-env": "^7.0.3",
+    "electron": "^26.2.1",
+    "electron-builder": "^24.6.4",
+    "typescript": "^5.2.2",
+    "wait-on": "^7.0.1"
+  },
+  "scripts": {
+    "install:web": "cd ./emr-web && yarn",
+    "start:web": "cd ./emr-web && cross-env REACT_APP_MODE=desktop yarn run start",
+    "build:web": "cd ./emr-web && cross-env REACT_APP_MODE=desktop yarn build",
+    "view:web": "cd ./emr-web && cross-env REACT_APP_MODE=web yarn run start",
+    "build": "tsc",
+    "electron": "wait-on http://localhost:3000 && cross-env NODE_ENV=development electron .",
+    "start": "concurrently \"yarn run build\" \"yarn run start:web\" \"yarn run electron\"",
+    "release": "cross-env NODE_ENV=production electron-builder build -w --publish never"
+  },
+  "dependencies": {
+    "electron-serve": "^1.1.0"
+  }
+}
